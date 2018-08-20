@@ -547,6 +547,7 @@ export default class CertificateProvider {
       .then(_ =>
         openssl('req', {
           new: true,
+          CAserial: getFilePath('server.srl'),
           key: serverKey,
           out: serverCsr,
           subj: serverSubject,
