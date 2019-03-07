@@ -1,0 +1,11 @@
+{
+  "name": "flipper-realm-plugin",
+  "version": "1.0.0",
+  "description": "Desktop Flipper plugin to view contents of a Realm database.",
+  "title": "Realm Viewer",
+  "main": "index.js",
+  "author": "Mitch Ware",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
