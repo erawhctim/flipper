@@ -81,6 +81,7 @@ type Props = {
   columnKeys: TableColumnKeys,
   onMouseDown: (e: SyntheticMouseEvent<>) => mixed,
   onMouseEnter?: (e: SyntheticMouseEvent<>) => void,
+  onCellDoubleClick?: (columnKey: string) => void,
   multiline: ?boolean,
   rowLineHeight: number,
   highlighted: boolean,
@@ -108,6 +109,7 @@ export default class TableRow extends React.PureComponent<Props> {
       columnSizes,
       onMouseEnter,
       onMouseDown,
+      onCellDoubleClick,
       zebra,
       onAddFilter,
     } = this.props;
@@ -140,14 +142,15 @@ export default class TableRow extends React.PureComponent<Props> {
               title={title}
               multiline={multiline}
               justifyContent={col?.align || 'flex-start'}
+              onDoubleClick={e=>onCellDoubleClick(key)}
               width={normaliseColumnWidth(columnSizes[key])}>
-              {isFilterable && onAddFilter != null ? (
-                <FilterRow addFilter={onAddFilter} filterKey={key}>
-                  {value}
-                </FilterRow>
-              ) : (
-                value
-              )}
+              {
+                isFilterable && onAddFilter != null 
+                  ? (<FilterRow addFilter={onAddFilter} filterKey={key}>
+                    {value}
+                    </FilterRow>) 
+                  : ( value )
+              }
             </TableBodyColumnContainer>
           );
         })}

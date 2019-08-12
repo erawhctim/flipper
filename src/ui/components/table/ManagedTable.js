@@ -489,6 +489,13 @@ class ManagedTable extends React.Component<
     }
   };
 
+  onCellDoubleClick = (
+    row: TableBodyRow,
+    columnKey: string,
+  ) => {
+    console.log(`ManagedTable: Double-clicked row ${row.key}, column '${columnKey}'`)
+  };
+
   onCopyCell = (rowId: string, index: number) => {
     const cellText = this.getTextContentOfRow(rowId)[index];
     clipboard.writeText(cellText);
@@ -631,6 +638,7 @@ class ManagedTable extends React.Component<
         columnKeys={columnKeys}
         onMouseDown={e => this.onHighlight(e, rows[index], index)}
         onMouseEnter={e => this.onMouseEnterRow(e, rows[index], index)}
+        onCellDoubleClick={columnKey => this.onCellDoubleClick(rows[index], columnKey)}
         multiline={multiline}
         rowLineHeight={24}
         highlighted={highlightedRows.has(rows[index].key)}
